@@ -1,0 +1,129 @@
+.upload-images-box {
+
+}
+.upload-images-box > .upload-images-control {
+
+}
+.upload-images-box > .upload-images-control > .select-a,
+.upload-images-box > .upload-images-control > .eye-a,
+.upload-images-box > .upload-images-control > .upload-multi-a,
+.upload-images-box .upload-image-control > .upload-a,
+.upload-images-box .upload-image-control > .delete-a {
+    display: inline-block;
+    background-color: #d0eeff;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    color: #1e88c7;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+.upload-images-box > .upload-images-control > a, .upload-images-box .upload-image-control > a {
+    margin-right: 5px;
+}
+.upload-images-box > .upload-images-control > a:last-child, .upload-images-box .upload-image-control > a:last-child {
+    margin-right: 0;
+}
+.upload-images-box > .upload-images-control > .select-a {
+    position: relative;
+    padding: 4px 12px;
+    line-height: 20px;
+    overflow: hidden;
+}
+.upload-images-box > .upload-images-control > .select-a input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.upload-images-box > .upload-images-control > .eye-a {
+    padding: 4px 12px;
+    line-height: 20px;
+    overflow: hidden;
+}
+.upload-images-box > .upload-images-control > .upload-multi-a {
+    padding: 4px 12px;
+    line-height: 20px;
+    overflow: hidden;
+}
+.upload-images-box .upload-image-control > .upload-a {
+    padding: 2px 4px;
+}
+.upload-images-box .upload-image-control > .delete-a {
+    background-color: #ffd2d2;
+    border-color: #ffb5b5;
+    color: #ff0000;
+    padding: 2px 4px;
+}
+.upload-images-box > .upload-images-control > .select-a:hover,
+.upload-images-box > .upload-images-control > .eye-a:hover,
+.upload-images-box > .upload-images-control > .upload-multi-a:hover,
+.upload-images-box .upload-image-control > .upload-a:hover {
+    background-color: #aadffd;
+    border-color: #78c3f3;
+    color: #004974;
+}
+.upload-images-box .upload-image-control > .delete-a:hover {
+    background-color: #ff9797;
+    border-color: #ff7575;
+    color: #ce0000;
+}
+.upload-images-box > .upload-images {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+.upload-images-box .upload-image-item {
+    margin: 5px 10px 5px 0;
+    border: solid 1px #e0e0e0;
+    text-align: center;
+}
+.upload-images-box .upload-image-item:last-child {
+    margin-right: 0;
+}
+.upload-images-box .upload-image-item > .upload-image {
+    display: block;
+    width: 100px;
+    height: 75px;
+    margin: 1px;
+    cursor: pointer;
+    object-fit: cover;
+}
+.upload-images-box .upload-image-item > .upload-image-indicator {
+    border-top: solid 1px #e0e0e0;
+    border-bottom: solid 1px #e0e0e0;
+    padding: 2px 0;
+}
+.upload-images-box .upload-image-item > .upload-image-indicator > p {
+    margin: 0;
+}
+.upload-images-box .upload-image-item > .upload-image-control {
+    margin: 2px;
+    text-align: right;
+}
+.upload-images-box .upload-default {
+    font-size: 10px;
+    color: #777;
+}
+.upload-images-box .upload-doing {
+    font-size: 10px;
+    color: #0b73b0;
+}
+.upload-images-box .upload-finish {
+    font-size: 10px;
+    color: #00a65a;
+}
+.upload-images-box .upload-success {
+    font-size: 10px;
+    color: #00a65a;
+}
+.upload-images-box .upload-failure {
+    font-size: 10px;
+    color: #f00;
+}
+.upload-images-box .upload-warning {
+    font-size: 10px;
+    color: #ffb800;
+}

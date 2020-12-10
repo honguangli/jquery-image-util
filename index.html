@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>jquery-image-util</title>
+    <!-- jquery -->
+    <script type="text/javascript" src="lib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <!-- viewer -->
+    <link rel="stylesheet" href="lib/viewer/css/viewer.min.css" />
+    <script type="text/javascript" src="lib/viewer/js/viewer.min.js"></script>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- jquery-image-util -->
+    <link rel="stylesheet" href="css/jquery-image-util.min.css" />
+    <script type="text/javascript" src="js/jquery-image-util.min.js"></script>
+    <style>
+      #image-preview {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+      }
+      #image-preview img {
+        width: 12.5%;
+        height: auto;
+        object-fit: cover;
+      }
+      .code {
+        margin: 15px 0;
+        padding: 15px;
+        border-left: solid 5px #777;
+        background-color: #f1f1f1;
+        color: #777;
+      }
+      .code p {
+        white-space: pre;
+      }
+    </style>
+	</head>
+	<body>
+    <h1>image preview</h1>
+    <div id="image-preview">
+      <img src="img/cat-1398627_1920.jpg"/>
+      <img src="img/cat-1701156_1920.jpg" />
+      <img src="img/cat-1796834_1920.jpg" />
+      <img src="img/cat-238394_1920.jpg"/>
+      <img src="img/birman-4670871_1920.jpg" />
+      <img src="img/cat-2477895_640.jpg" />
+      <img src="img/cat-2611190_1920.jpg" />
+      <img src="img/cat-5295343_1280.jpg" />
+    </div>
+    <div class="code">
+      <p>$.startImageViewer($('#image-preview'), 'img');</p>
+    </div>
+    <br>
+    <br>
+    <h1>image upload</h1>
+		<div class="upload-images-box" id="images"></div>
+		<textarea name="imgs" rows="3" style="width: 100%;" readonly="readonly" placeholder="uploaded image url collection"></textarea>
+    <div class="code">
+      <p>step-1 init
+      $('#images').imageUpload({
+        rid: 'box-1',                 // component id
+        mode: 0,                      // upload mode
+        size: 9,                      // images max number
+        uploadFun: imageUpload,       // upload callback
+        deleteFun: imageDelete,       // delete callback
+        msgFun: imageMsg,             // msg callback
+      })
+      </p>
+      <p>step-2 create imageUpload function callback
+      function imageUpload(rid, id, fileData){
+        // please write you upload code and notify imageUpload component when upload success or failure
+        $.ajax{
+          ...
+          success: function() {
+            $images.imageUpload('update', {id: id, status: true, src: 'img/cat-2477895_640.jpg'});
+            $('textarea[name="imgs"]').val(JSON.stringify($images.data('imageUpload').val()));
+          },
+          error: function() {
+            $images.imageUpload('update', {id: id, status: false});
+            $('textarea[name="imgs"]').val(JSON.stringify($images.data('imageUpload').val()));
+          }
+        }
+      }
+      </p>
+      <p>step-3 create imageDelete function callback
+      function imageDelete(rid, val){
+        // will notify you when have delete image
+        $('textarea[name="imgs"]').val(JSON.stringify(val));
+      }
+      </p>
+      <p>step-4 create imageMsg function callback
+      function imageMsg(rid, msg){
+        // will notify you when have new message
+        console.log(rid, msg);
+      }
+      </p>
+    </div>
+    <br>
+    <br>
+    <script>
+      // image preview
+      $.startImageViewer($('#image-preview'), 'img');
+      
+      // image upload
+      $('textarea[name="imgs"]').val('');
+      // step-1 init
+      const $images = $('#images');
+      $images.imageUpload({
+          rid: 'box-1',
+          mode: 2,
+          size: 3,
+          uploadFun: imageUpload,
+          deleteFun: imageDelete,
+          msgFun: imageMsg,
+          preview: true
+        });
+      // step-2
+      function imageUpload(rid, id, fileData) {
+        setTimeout(function() {
+          if (Math.floor((Math.random()*10)+1) <= 5){
+              $images.imageUpload('update', {id: id, status: false});
+          } else {
+              $images.imageUpload('update', {id: id, status: true, src: 'img/cat-2477895_640.jpg'});
+          }
+          $('textarea[name="imgs"]').val(JSON.stringify($images.data('imageUpload').val()));
+        }, 1500)
+      }
+      // step-3
+      function imageDelete(rid, val) {
+        $('textarea[name="imgs"]').val(JSON.stringify(val));
+      }
+      // step-4
+      function imageMsg(rid, msg) {
+        console.log(rid, msg);
+      }
+    </script>
+	</body>
+</html>
