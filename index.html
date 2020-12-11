@@ -31,9 +31,6 @@
         background-color: #f1f1f1;
         color: #777;
       }
-      .code p {
-        white-space: pre;
-      }
     </style>
 	</head>
 	<body>
@@ -57,44 +54,7 @@
 		<div class="upload-images-box" id="images"></div>
 		<textarea name="imgs" rows="3" style="width: 100%;" readonly="readonly" placeholder="uploaded image url collection"></textarea>
     <div class="code">
-      <p>step-1 init
-      $('#images').imageUpload({
-        rid: 'box-1',                 // component id
-        mode: 0,                      // upload mode
-        size: 9,                      // images max number
-        uploadFun: imageUpload,       // upload callback
-        deleteFun: imageDelete,       // delete callback
-        msgFun: imageMsg,             // msg callback
-      })
-      </p>
-      <p>step-2 create imageUpload function callback
-      function imageUpload(rid, id, fileData){
-        // please write you upload code and notify imageUpload component when upload success or failure
-        $.ajax{
-          ...
-          success: function() {
-            $images.imageUpload('update', {id: id, status: true, src: 'img/cat-2477895_640.jpg'});
-            $('textarea[name="imgs"]').val(JSON.stringify($images.data('imageUpload').val()));
-          },
-          error: function() {
-            $images.imageUpload('update', {id: id, status: false});
-            $('textarea[name="imgs"]').val(JSON.stringify($images.data('imageUpload').val()));
-          }
-        }
-      }
-      </p>
-      <p>step-3 create imageDelete function callback
-      function imageDelete(rid, val){
-        // will notify you when have delete image
-        $('textarea[name="imgs"]').val(JSON.stringify(val));
-      }
-      </p>
-      <p>step-4 create imageMsg function callback
-      function imageMsg(rid, msg){
-        // will notify you when have new message
-        console.log(rid, msg);
-      }
-      </p>
+      <p>$('#images').imageUpload(option);</p>
     </div>
     <br>
     <br>

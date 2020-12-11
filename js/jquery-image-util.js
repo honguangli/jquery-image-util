@@ -109,17 +109,17 @@
 
   function ImageUpload(element, option) {
     const defaults = {
-      mode: 0, // 模式，0-自动上传，1-手动批量上传，2-手动批量+单独上传
-      oid: null, // 组件自增id
-      rid: null, // 组件自定义id
-      uploadFun: null, // 上传回调，选中图片上传时触发的回调方法
-      deleteFun: null, // 删除回调，删除已上传图片时触发的回调方法
-      msgFun: null, // 提示回调，插件执行过程中出现的提示回调方法
-      size: 0, // 允许图片最大数量，小于等于0时不限制
-      images: [], // 图片数据集合
-      autoImageId: 0, // 图片自增id
-      data: [], // 预设图片数据，["http://a.com/a.jpg", "http://b.cn/b.png"]
-      preview: false,
+      mode: 0,             // 模式，0-自动上传，1-手动批量上传，2-手动批量+单独上传
+      oid: null,           // 组件自增id
+      rid: null,           // 组件自定义id
+      size: 0,             // 允许图片最大数量，小于等于0时不限制
+      images: [],          // 图片数据集合
+      autoImageId: 0,      // 图片自增id
+      data: [],            // 预设图片数据，["http://a.com/a.jpg", "http://b.cn/b.png"]
+      preview: false,      // 是否启动图片预览插件
+      uploadFun: null,     // 上传回调，选中图片上传时触发的回调方法
+      deleteFun: null,     // 删除回调，删除已上传图片时触发的回调方法
+      msgFun: null,        // 提示回调，插件执行过程中出现的提示回调方法
     };
     const self = this;
     self.options = $.extend(false, defaults, option);
