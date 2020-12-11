@@ -34,14 +34,14 @@ jquery-image-util is a image preview, upload utils depend on jquery
   // step-1 init
   const $images = $('#images');
   $images.imageUpload({
-      mode: 0,             // upload mode: 0-auto, 1-multi, 2-multi,single
-      rid: null,           // component custom id
-      size: 0,             // maximum number of images allowed, no limit when less than or equal to 0
-      data: [],            // preset picture data, demo: ["http://a.com/a.jpg", "http://b.cn/b.png"]
-      preview: false,      // whether to start the image preview plugin
-      uploadFun: null,     // upload callback function
-      deleteFun: null,     // delete callback function
-      msgFun: null,        // message callback function
+      mode: 0,                    // upload mode: 0-auto, 1-multi, 2-multi,single
+      rid: 'first',               // component custom id
+      size: 9,                    // maximum number of images allowed, no limit when less than or equal to 0
+      data: [],                   // preset picture data, demo: ["http://a.com/a.jpg", "http://b.cn/b.png"]
+      preview: true,              // whether to start the image preview plugin
+      uploadFun: imageUpload,     // upload callback function
+      deleteFun: imageDelete,     // delete callback function
+      msgFun: imageMsg,           // message callback function
     });
   // step-2
   // please implement upload function, delete function, and message function,
