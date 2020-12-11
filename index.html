@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- jquery-image-util -->
     <link rel="stylesheet" href="css/jquery-image-util.min.css" />
-    <script type="text/javascript" src="js/jquery-image-util.js"></script>
+    <script type="text/javascript" src="js/jquery-image-util.min.js"></script>
     <style>
       #image-preview {
         display: flex;
@@ -78,6 +78,7 @@
         });
       // step-2
       function imageUpload(rid, id, fileData) {
+        console.log('upload', rid, id, fileData);
         setTimeout(function() {
           if (Math.floor((Math.random()*10)+1) <= 5){
               $images.imageUpload('update', {id: id, status: false});
@@ -89,11 +90,13 @@
       }
       // step-3
       function imageDelete(rid, val) {
+        console.log('delete', rid, val);
         $('textarea[name="imgs"]').val(JSON.stringify(val));
       }
       // step-4
       function imageMsg(rid, msg) {
-        console.log(rid, msg);
+        console.log('message', rid, msg);
+        alert(msg);
       }
       $('#upload').on('click', function() {
         $images.imageUpload('upload');

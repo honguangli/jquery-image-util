@@ -228,19 +228,7 @@
           $elem.children('.upload-images').css('display', 'flex');
         }
       }).on('click', '.upload-multi-a', function() {
-        for (let i = 0, len = self.options.images.length; i < len; i++) {
-          const imageObj = self.options.images[i];
-          if (imageObj.status !== UploadWait && imageObj.status !== UploadFailure) {
-            continue
-          }
-          if ($.isFunction(self.options.uploadFun)) {
-            imageObj.status = Uploading;
-            renderItem($elem, self.options.oid, self.options.mode, imageObj);
-            self.options.uploadFun(self.options.rid, imageObj.id, imageObj.originData);
-          } else {
-            self.msg('upload function is necessary');
-          }
-        }
+        self.upload();
       }).on('click', '.upload-a', function() {
         const item = $(this).closest('.upload-image-item');
         const id = parseInt($(item).attr('data-id'));
@@ -311,10 +299,20 @@
     upload: function() {
       const self = this;
       const $elem = self.element;
+      let count = 0;
       for (let i = 0, len = self.options.images.length; i < len; i++) {
         const imageObj = self.options.images[i];
-        if (imageObj.status !== UploadWait && imageObj.status !== UploadFailure) {
-          continue
+        switch (imageObj.status) {
+          case UploadWait:
+          case UploadFailure:
+            count++;
+            break
+          case Uploading:
+            count++;
+          case UploadFinish:
+          case UploadSuccess:
+          default:
+            continue
         }
         if ($.isFunction(self.options.uploadFun)) {
           imageObj.status = Uploading;
@@ -323,6 +321,9 @@
         } else {
           self.msg('upload function is necessary');
         }
+      }
+      if (count === 0) {
+        self.msg('已全部上传完成');
       }
     },
     // 输出数据
