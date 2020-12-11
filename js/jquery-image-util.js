@@ -30,28 +30,30 @@
       $elem.find(expr).css('cursor', 'pointer');
     }
     $elem.on('click', expr, function() {
+      const attrName = 'data-image-viewer-active';
+      $(this).attr(attrName, 'on');
       const clickSrc = $(this).attr('src');
       let clickIndex = $(this).index();
       const images = [];
       if (!deep) {
+        $elem.children(expr).css('cursor', 'pointer');
         $elem.children(expr).each(function(index, item) {
-          $(item).css('cursor', 'pointer');
           images.push({
             src: $(item).attr('src'),
           });
         });
       } else {
+        $elem.find(expr).css('cursor', 'pointer');
         $elem.find(expr).each(function(index, item) {
-          $(item).css('cursor', 'pointer');
           images.push({
             src: $(item).attr('src'),
           });
-          if (clickSrc === $(item).attr('src')) {
+          if ($(this).attr(attrName) === 'on') {
             clickIndex = index;
-          }
+          };
         });
       }
-
+      $(this).removeAttr(attrName);
       $window.$.openImagesViewer(images, clickIndex);
     })
   };
