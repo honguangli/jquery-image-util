@@ -307,6 +307,24 @@
         break;
       }
     },
+    // 批量上传
+    upload: function() {
+      const self = this;
+      const $elem = self.element;
+      for (let i = 0, len = self.options.images.length; i < len; i++) {
+        const imageObj = self.options.images[i];
+        if (imageObj.status !== UploadWait && imageObj.status !== UploadFailure) {
+          continue
+        }
+        if ($.isFunction(self.options.uploadFun)) {
+          imageObj.status = Uploading;
+          renderItem($elem, self.options.oid, self.options.mode, imageObj);
+          self.options.uploadFun(self.options.rid, imageObj.id, imageObj.originData);
+        } else {
+          self.msg('upload function is necessary');
+        }
+      }
+    },
     // 输出数据
     val: function() {
       const self = this;

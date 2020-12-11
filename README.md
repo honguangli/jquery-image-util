@@ -84,6 +84,7 @@ and you can use some methods
 
 ```
 $images.imageUpload('update', {id: id, status: false}); // update image upload status
+$images.imageUpload('upload'); // upload unuploaded images collection
 $images.data('imageUpload').val(); // get the uploaded images collection
 ```
 

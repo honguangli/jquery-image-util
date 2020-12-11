@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- jquery-image-util -->
     <link rel="stylesheet" href="css/jquery-image-util.min.css" />
-    <script type="text/javascript" src="js/jquery-image-util.min.js"></script>
+    <script type="text/javascript" src="js/jquery-image-util.js"></script>
     <style>
       #image-preview {
         display: flex;
@@ -52,6 +52,7 @@
     <br>
     <h1>image upload</h1>
 		<div class="upload-images-box" id="images"></div>
+    <button id="upload">upload</button>
 		<textarea name="imgs" rows="3" style="width: 100%;" readonly="readonly" placeholder="uploaded image url collection"></textarea>
     <div class="code">
       <p>$('#images').imageUpload(option);</p>
@@ -94,6 +95,9 @@
       function imageMsg(rid, msg) {
         console.log(rid, msg);
       }
+      $('#upload').on('click', function() {
+        $images.imageUpload('upload');
+      });
     </script>
 	</body>
 </html>
