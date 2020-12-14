@@ -124,6 +124,15 @@
     const self = this;
     self.options = $.extend(false, defaults, option);
     self.element = element;
+    if (!$.isFunction(self.options.uploadFun)) {
+      self.msg('upload function is necessary');
+      return
+    }
+    if (!$.isFunction(self.options.deleteFun)) {
+      self.msg('delete function is necessary');
+      return
+    }
+    console.log('hhhhhhheieiei')
     self.options.oid = autoOid++;
     if (null == self.options.rid) {
       self.options.rid = self.options.oid;
@@ -299,16 +308,22 @@
     upload: function() {
       const self = this;
       const $elem = self.element;
-      let count = 0;
-      for (let i = 0, len = self.options.images.length; i < len; i++) {
+      const len = self.options.images.length;
+      if (len === 0) {
+        self.msg('请先选择图片');
+        return
+      }
+      let wait = 0;
+      let doing = 0;
+      for (let i = 0; i < len; i++) {
         const imageObj = self.options.images[i];
         switch (imageObj.status) {
           case UploadWait:
           case UploadFailure:
-            count++;
+            wait++;
             break
           case Uploading:
-            count++;
+            doing++;
           case UploadFinish:
           case UploadSuccess:
           default:
@@ -320,10 +335,13 @@
           self.options.uploadFun(self.options.rid, imageObj.id, imageObj.originData);
         } else {
           self.msg('upload function is necessary');
+          return
         }
       }
-      if (count === 0) {
+      if (wait === 0 && doing === 0) {
         self.msg('已全部上传完成');
+      } else if (doing > 0) {
+        self.msg('图片正在上传');
       }
     },
     // 输出数据
