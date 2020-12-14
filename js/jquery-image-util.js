@@ -132,7 +132,6 @@
       self.msg('delete function is necessary');
       return
     }
-    console.log('hhhhhhheieiei')
     self.options.oid = autoOid++;
     if (null == self.options.rid) {
       self.options.rid = self.options.oid;
