@@ -343,6 +343,24 @@
         self.msg('图片正在上传');
       }
     },
+    // 清除所有图片
+    clear: function() {
+      const self = this;
+      const $elem = self.element;
+      self.options.images = [];
+      $elem.children('.upload-images').html('');
+    },
+    // 添加图片
+    push: function(images) {
+      const self = this;
+      const $elem = self.element;
+      for (let i = 0, len = images.length; i < len; i++) {
+        const src = images[i];
+        const imageObj = createImageObj(self.options.autoImageId++, src, UploadFinish);
+        pushItem($elem, self.options.oid, self.options.mode, imageObj);
+        self.options.images.push(imageObj);
+      }
+    },
     // 输出数据
     val: function() {
       const self = this;
@@ -413,6 +431,21 @@
       "src": src, // 图片上传后返回地址
       "status": status, // 图片状态，0-等待上传，1-正在上传，2-上传失败，3-上传成功
     }
+  }
+  
+  function pushItem($elem, oid, mode, imageObj) {
+    const html = [];
+    html.push('<div class="upload-image-item" id="upload-image-item-' + oid + '-' + imageObj.id + '" data-id="' + imageObj.id + '">');
+    html.push('<img class="upload-image" src="' + imageObj.src + '">');
+    html.push('<div class="upload-image-indicator">');
+    html.push('<p class="' + formatImageStatusClass(imageObj.status) + '"><i class="fa fa-circle"></i> ' +
+      formatImageStatus(imageObj.status) + '</p>');
+    html.push('</div>');
+    html.push('<div class="upload-image-control">');
+    html.push('<a href="javascript:void(0);" class="delete-a" title="删除"><i class="fa fa-trash"></i></a>');
+    html.push('</div>');
+    html.push('</div>');
+    $elem.children('.upload-images').append(html.join(''));
   }
 
   function appendItem($elem, oid, mode, imageObj) {
