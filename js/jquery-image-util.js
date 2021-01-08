@@ -143,7 +143,7 @@
     }
     self.start();
     if (self.options.preview) {
-      $.startImageViewer(self.element, '.upload-image', parent, true);
+      $.startImageViewer(self.element, '.upload-image', window.top, true);
     }
   }
 
