@@ -1,5 +1,5 @@
 /*!
- * jquery-image-util v1.0 (https://github.com/honguangli/jquery-image-util)
+ * jquery-image-util v1.1 (https://github.com/honguangli/jquery-image-util)
  * Copyright honguangli
  * Licensed under the MIT license
  */
@@ -211,6 +211,7 @@
         const imageObj = createImageObj(self.options.autoImageId++, '', UploadWait, filePath, src, this.files[0]);
         appendItem($elem, self.options.oid, self.options.mode, imageObj);
         self.options.images.push(imageObj);
+        $(this).val('');
 
         switch (self.options.mode) {
           case 1:
